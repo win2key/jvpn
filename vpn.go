@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 	"os/exec"
@@ -53,6 +52,6 @@ func isProcessRunning(processName string) (bool, error) {
 }
 
 func startVPN(vpnLogin, vpnPassword, vpnServer string) error {
-	cmd := exec.Command("sh", "-c", fmt.Sprintf("echo %s | openconnect --protocol=AnyConnect --user=%s --passwd-on-stdin %s", vpnPassword, vpnLogin, vpnServer))
+	cmd := exec.Command("./openconnect-expect.sh")
 	return cmd.Start()
 }
