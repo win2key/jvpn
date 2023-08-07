@@ -10,6 +10,8 @@ import (
 func main() {
 	vpnLogin, vpnPassword, vpnServer, jProxy, target := checkEnvironmentVariables()
 
+	go startTCPForwarder(target)
+
 	http.HandleFunc("/vpn", func(w http.ResponseWriter, r *http.Request) {
 		startOpenConnect(w, r, vpnLogin, vpnPassword, vpnServer)
 	})
