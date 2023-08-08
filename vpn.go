@@ -44,7 +44,12 @@ func isProcessRunning(processName string) (bool, error) {
 		}
 
 		if name == processName {
-			return true, nil
+			status, _ := p.Status()
+			for _, s := range status {
+				if s != "Z" { // "Z" indicates a Zombie process
+					return true, nil
+				}
+			}
 		}
 	}
 
